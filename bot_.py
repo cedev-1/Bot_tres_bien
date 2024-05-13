@@ -1,4 +1,5 @@
 import requests
+import os 
 
 request_data = {
     'method': 'POST',
@@ -34,10 +35,12 @@ try:
         cart_response = requests.get('https://tres-bien.com/customer/section/load', headers=request_data['headers'])
         if cart_response.status_code == 200:
             print('ok')
-            with open('requests.txt', 'w') as file:
-                file.write('')
-            with open('requests.txt', 'a') as file:
-                file.write(str(cart_response.json()) + '\n')  
+            checkout_response = requests.get('https://tres-bien.com/checkout/', headers=request_data['headers'])
+            if checkout_response.status_code == 200:
+                print('Contenu de la page Checkout:', checkout_response.text)
+            else:
+                print('Erreur lors de l\'accès à la page Checkout:', checkout_response.status_code)
+            
         else:
             print('Erreur', cart_response.status_code)
     else:
@@ -45,4 +48,3 @@ try:
 except requests.exceptions.RequestException as e:
     print('Error', e)
 
-caca
