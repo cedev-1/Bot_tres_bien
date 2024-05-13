@@ -41,11 +41,11 @@ try:
             print('ok')
             checkout_response = session.get(f'{base_url}/checkout/', headers=headers)
             if checkout_response.status_code == 200:
-                print('Contenu de la page Checkout:', checkout_response.text)
+                print('Checkout', checkout_response.text)
             else:
-                print('Erreur lors de l\'accès à la page Checkout:', checkout_response.status_code)
+                print('Error Checkout:', checkout_response.status_code)
         else:
-            print('Erreur', cart_response.status_code)
+            print('Error', cart_response.status_code)
     else:
         print('Error', response.text)
 except requests.exceptions.RequestException as e:
